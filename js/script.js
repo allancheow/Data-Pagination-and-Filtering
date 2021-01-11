@@ -78,7 +78,7 @@ function showPage(list, page) {
 
          /*
          I didn't read the instructions fully and created this monstrosity
-         above. I've also created the codes to follow the instruction and
+         above. I've also created the codes to follow the instructions and
          commented it out. Both version works the same way.
          */
          // let studentItem = `
@@ -119,7 +119,7 @@ function addPagination(list) {
    }
  
    // Sets the first button with the active class
-   let firstBtn = document.querySelector(`button`);
+   let firstBtn = document.querySelector(`.link-list button`);
    firstBtn.className = `active`;
 
    // Uses mouse click to update button color and displayed student cards
@@ -130,9 +130,58 @@ function addPagination(list) {
          showPage(list, e.target.textContent);
       }
    });
- }
+}
 
+
+/*
+Extra Credit: Create the Search field function
+This function will create and insert/append the elements needed for the search bar
+*/
+
+function searchFunc(list) {
+
+   // Selects header to insert search field to page
+   const searchField = document.querySelector(`header`);
+   let searchHTML = `
+   <label for="search" class="student-search">
+      <input id="search" placeholder="Search by name...">
+      <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+   </label>
+   `;
+   searchField.insertAdjacentHTML(`beforeend`, searchHTML);
+
+   const search = document.querySelector(`#search`);
+   const submit = document.querySelector('.student-search').lastElementChild;
+
+   const studentSearch = () => {
+      let searchedList = [];
+      // Loop to create new data set 
+      for ( let i = 0; i < list.length; i++ ) {
+         const obj = list[i];
+         const fullName = `${obj.name.first} ${obj.name.last}`;      
+         
+         if ( fullName.toLowerCase().includes(search.value.toLowerCase()) ) {
+            searchedList.push(obj);
+         }
+      }
+
+      if ( searchedList.length !== 0 ) {         
+         showPage(searchedList, 1);
+         addPagination(searchedList);
+         //console.log(searchedList);
+      } else {
+         const ul = document.querySelector(`.student-list`);
+         ul.innerHTML = `<h1>No Results found</h1>`;
+      }
+   }
+   
+   // Button listner
+   submit.addEventListener(`click`, studentSearch, false);
+   // Key stroke listner
+   search.addEventListener(`keyup`, studentSearch, false);
+}
 
 // Call functions
 showPage(data, 1);
 addPagination(data);
+searchFunc(data);
