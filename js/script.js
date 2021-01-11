@@ -43,7 +43,7 @@ function showPage(list, page) {
      * @param {text} elementName type of element to create
      * @param {text} className class name to assign
      * @param {text} objectDetail student detail from object
-     * @returns {text} returns appended DOM element
+     * @returns {text} returns HTML
      */
    function appendToDIV(divName, elementName, className, objectDetail) {
       const element = newElement(elementName, className, objectDetail);
@@ -142,6 +142,7 @@ function searchFunc(list) {
 
    // Selects header to insert search field to page
    const searchField = document.querySelector(`header`);
+   // Injects search into header
    let searchHTML = `
    <label for="search" class="student-search">
       <input id="search" placeholder="Search by name...">
@@ -153,9 +154,14 @@ function searchFunc(list) {
    const search = document.querySelector(`#search`);
    const submit = document.querySelector('.student-search').lastElementChild;
 
+   /**
+     * Anonymous function expression to loop data.js 
+     * in search of student's name which match search query.
+     * 
+     * @returns {text} returns HTML
+     */
    const studentSearch = () => {
       let searchedList = [];
-      // Loop to create new data set 
       for ( let i = 0; i < list.length; i++ ) {
          const obj = list[i];
          const fullName = `${obj.name.first} ${obj.name.last}`;      
@@ -165,13 +171,17 @@ function searchFunc(list) {
          }
       }
 
+      // Looks for object(s) in new data set, searchedList
       if ( searchedList.length !== 0 ) {         
          showPage(searchedList, 1);
          addPagination(searchedList);
          //console.log(searchedList);
       } else {
+         // Removes student card(s) and pagination buttons, adds no result message
          const ul = document.querySelector(`.student-list`);
-         ul.innerHTML = `<h1>No Results found</h1>`;
+         ul.innerHTML = `<h1>No Results found</h1>`;         
+         const button = document.querySelector(`.link-list`);
+         button.innerHTML = ``;
       }
    }
    
