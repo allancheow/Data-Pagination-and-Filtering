@@ -185,9 +185,9 @@ function searchFunc(list) {
       }
    }
    
-   // Button listner
+   // Button listener
    submit.addEventListener(`click`, studentSearch, false);
-   // Key stroke listner
+   // Key stroke listener
    search.addEventListener(`keyup`, studentSearch, false);
 }
 
