@@ -1,5 +1,5 @@
 # Title
-Treehouse Project #02  
+Treehouse Project 02  
 	Data Pagination and Filtering
 <br>
 
