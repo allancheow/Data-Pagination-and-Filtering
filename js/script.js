@@ -4,16 +4,10 @@ FSJS Project 2 - Data Pagination and Filtering
 */
 
 /*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-/*
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
-function showPage(list, page) {
+const showPage = (list, page) => {
     /**
      * Function used to dynamically create DOM element
      * with student data retrieved from data.js file
@@ -23,15 +17,11 @@ function showPage(list, page) {
      * @param {text} objectDetail student detail from object
      * @returns {text} returns DOM element
      */
-   function newElement(elementName, className, objectDetail) {
+   const newElement = (elementName, className, objectDetail) => {
       const element = document.createElement(elementName);
       element.className = className;
       element.innerHTML = objectDetail;
-      if (elementName === `img`) {
-         element.alt = `Profile Picture`;
-         element.src = objectDetail;
-         element.innerHTML = ``;
-      }
+      elementName === `img` ? (element.alt = `Profile Picture`, element.src = objectDetail, element.innerHTML = ``) : null;
       return element;
    }   
 
@@ -45,7 +35,7 @@ function showPage(list, page) {
      * @param {text} objectDetail student detail from object
      * @returns {text} returns HTML
      */
-   function appendToDIV(divName, elementName, className, objectDetail) {
+   const appendToDIV = (divName, elementName, className, objectDetail) => {
       const element = newElement(elementName, className, objectDetail);
       divName.appendChild(element);
       return element;
@@ -101,9 +91,9 @@ function showPage(list, page) {
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
-function addPagination(list) {   
+const addPagination = (list) => {   
    // Calculates the number of pages to display
-   let numOfPages = Math.ceil(list.length / 9)
+   let numOfPages = Math.ceil(list.length / 9);
  
    const linkList = document.querySelector(`.link-list`);
    linkList.innerHTML = ``;
@@ -137,9 +127,7 @@ function addPagination(list) {
 Extra Credit: Create the Search field function
 This function will create and insert/append the elements needed for the search bar
 */
-
-function searchFunc(list) {
-
+const searchFunc = (list) => {
    // Selects header to insert search field to page
    const searchField = document.querySelector(`header`);
    // Injects search into header
@@ -155,8 +143,7 @@ function searchFunc(list) {
    const submit = document.querySelector('.student-search').lastElementChild;
 
    /**
-     * Anonymous function expression to loop data.js 
-     * in search of student's name which match search query.
+     * Loop data.js in search of student's name which match search query.
      * 
      * @returns {text} returns HTML
      */
@@ -166,9 +153,7 @@ function searchFunc(list) {
          const obj = list[i];
          const fullName = `${obj.name.first} ${obj.name.last}`;      
          
-         if ( fullName.toLowerCase().includes(search.value.toLowerCase()) ) {
-            searchedList.push(obj);
-         }
+         fullName.toLowerCase().includes(search.value.toLowerCase()) ? searchedList.push(obj) : null;
       }
 
       // Looks for object(s) in new data set, searchedList
