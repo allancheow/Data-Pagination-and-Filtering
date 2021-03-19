@@ -22,3 +22,8 @@ Files provided by @treehouse
 
 File build by me (@allancheow)
 - script.js
+<br>
+
+
+# Demo
+[Link](https://allancheow.github.io/Data-Pagination-and-Filtering/)
